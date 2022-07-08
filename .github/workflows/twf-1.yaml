@@ -7,14 +7,24 @@ jobs:
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, 'release')"
     steps:
-      - name: Log Message and Exit
+      - name: Echo Head Commit Message
+        env:
+          GITHUB_HEAD_COMMIT_MESSAGE: ${{ toJson(github.event.head_commit.message) }}
+        run: |
+          echo ${GITHUB_HEAD_COMMIT_MESSAGE}
+      - name: Log Message
         run: echo "PR does not come from a release branch - exiting"
+      # - name: Exit
+      #   run: exit 1
 
   two:
     runs-on: ubuntu-latest
+    if: "contains(github.event.head_commit.message, 'release')"
     steps:
       - name: Echo Head Commit Message
         env:
           GITHUB_HEAD_COMMIT_MESSAGE: ${{ toJson(github.event.head_commit.message) }}
         run: |
           echo ${GITHUB_HEAD_COMMIT_MESSAGE}
+      - name: Log Message
+        run: echo "PR comes from a release branch - continuing"
