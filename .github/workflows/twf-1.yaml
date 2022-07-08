@@ -25,20 +25,20 @@ jobs:
           text: ${{ github.event.head_commit.message }}
           regex: 'release\/\d\.\d\.\d'
 
-      # Print Head Commit Branch Name JSON
-      - name: Print Get Head Commit Branch Name Outputs Match To JSON
-        env:
-          HEAD_COMMIT_BRANCH_NAME: ${{ toJson(steps.get-head-commit-branch-name.outputs.match) }}
-        run: echo "HEAD_COMMIT_BRANCH_NAME -> ${HEAD_COMMIT_BRANCH_NAME}"
+      # # Print Head Commit Branch Name JSON
+      # - name: Print Get Head Commit Branch Name Outputs Match To JSON
+      #   env:
+      #     HEAD_COMMIT_BRANCH_NAME: ${{ toJson(steps.get-head-commit-branch-name.outputs.match) }}
+      #   run: echo "HEAD_COMMIT_BRANCH_NAME -> ${HEAD_COMMIT_BRANCH_NAME}"
 
-      # Print steps.get-head-commit-branch-name.outputs.match
-      - name: Print Head Commit Branch Name
-        run: echo "Head Commit Branch Name -> ${{ steps.get-head-commit-branch-name.outputs.match }}"
-      # # If steps.get-head-commit-branch-name.outputs.match is null exit the workflow
-      # - name: Check if Head Commit Branch Name is Null
-      #   if: ${{ steps.get-head-commit-branch-name.outputs.match }} == null
-      #   run: |
-      #     echo "Head Commit Branch Name is Null - exiting"
-      #     exit 1
+      # # Print steps.get-head-commit-branch-name.outputs.match
       # - name: Print Head Commit Branch Name
-      #   run: echo ${{ steps.get-head-commit-branch-name.outputs.match}}
+      #   run: echo "Head Commit Branch Name -> ${{ steps.get-head-commit-branch-name.outputs.match }}"
+      # If steps.get-head-commit-branch-name.outputs.match is null exit the workflow
+      - name: Check if Head Commit Branch Name is Null
+        if: toJson(steps.get-head-commit-branch-name.outputs.match) == "{}"
+        run: |
+          echo "The Github Head Commit Message which is expected to contain the name of branch from which the PR was raised does not contain anything matching release/xx.xx.xx: ${{ github.event.head_commit.message }} - exiting"
+          exit 1
+      - name: Print Head Commit Branch Name
+        run: echo "IT SHOULD NOT GET EXECUTED IF ABOVE STEP EXITS"
