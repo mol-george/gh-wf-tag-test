@@ -51,5 +51,6 @@ jobs:
       - name: Tag
         uses: rickstaa/action-create-tag@v1
         with:
-          tag: "latest"
-          message: "Latest release"
+          tag: steps.get-release-branch-major-minor-patch-number.outputs.match
+          commit_sha: github.event.head_commit.id
+          message: "tagged the main branch with the major.minor.patch version of the release branch pointing to the PR commit"
