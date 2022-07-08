@@ -18,8 +18,8 @@ jobs:
     if: "contains(github.event.head_commit.message, 'release')"
     steps:
       # Print github.event.head.ref to console
-      - name: print-github-event-head
-        run: echo ${{ github.event}}
+      - name: print-github-event
+        run: echo "${{ github.event}}"
 #      ## Get the Head Commit Branch Name
 #      - name: Get Head Commit Branch Name
 #        uses: actions-ecosystem/action-regex-match@v2
