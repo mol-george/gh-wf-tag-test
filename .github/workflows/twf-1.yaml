@@ -21,7 +21,7 @@ jobs:
         id: get-head-commit-branch-name
         with:
           text: ${{ github.event.head_commit.message }}
-          regex: '\/release\/\d\.\d\.\d\\'
+          regex: '\/release\/\d\.\d\.\d'
 
       - name: Print REGEX result  and the conclusion of the step
         run:
@@ -31,7 +31,7 @@ jobs:
       - name: Exit if Head Commit Branch Name does not match expected regex
         if: steps.get-head-commit-branch-name.outputs.match == ''
         run:
-          echo "The Github Head Commit Message which is expected to contain the name of branch from which the PR was raised does not contain anything matching '/release/xx.xx.xx\' -> ${{ github.event.head_commit.message }} - exiting"
+          echo "The Github Head Commit Message which is expected to contain the name of branch from which the PR was raised does not contain anything matching '/release/xx.xx.xx' -> ${{ github.event.head_commit.message }} - exiting"
           exit 1
 
       - name: SHOULD NOT GET EXECUTED IF PREVIOUS STEP EXITS
