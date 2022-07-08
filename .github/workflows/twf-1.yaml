@@ -22,11 +22,6 @@ jobs:
           text: ${{ github.event.head_commit.message }}
           regex: '\bmol-george\/release\/\d\.\d\.\d\b'
 
-      # - name: Print REGEX result and the conclusion of the step
-      #   run:
-      #     echo "REGEX Head Commit Branch Name result -> ${{ steps.get-repo-branch-match.outputs.match }}"
-      #     echo " conclusion                          -> ${{ steps.get-repo-branch-match.conclusion }}"
-
       - name: Log message if Head Commit Repo and Branch Names do not match expected regex
         if: steps.get-repo-branch-match.outputs.match == ''
         run:
@@ -37,5 +32,12 @@ jobs:
         run:
           exit 1
 
-      - name: SHOULD NOT GET EXECUTED IF PREVIOUS STEP EXITS
-        run: echo "SHOULD NOT GET EXECUTED IF PREVIOUS STEP EXITS"
+      - name: Get Release Branch Major.Minor.Patch Number
+        uses: actions-ecosystem/action-regex-match@v2
+        id: get-release-branch-major-minor-patch-number
+        with:
+          text: ${{ github.event.head_commit.message }}
+          regex: '\b\d\.\d\.\d\b'
+
+      - name: TEST Print Release Branch
+        run: echo " ${{ steps.get-release-branch-major-minor-patch-number.match }}"
