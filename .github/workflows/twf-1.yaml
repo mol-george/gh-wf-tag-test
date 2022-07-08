@@ -52,5 +52,6 @@ jobs:
         uses: rickstaa/action-create-tag@v1
         with:
           tag: steps.get-release-branch-major-minor-patch-number.outputs.match
-          commit_sha: github.event.head_commit.id
+          # commit_sha: github.event.head_commit.id
+          commit_sha: "c70bbb6427304a128e319de7245b34df4721bcb7"
           message: "tagged the main branch with the major.minor.patch version of the release branch pointing to the PR commit"
