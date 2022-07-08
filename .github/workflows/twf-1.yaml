@@ -10,5 +10,5 @@ jobs:
         env:
           GITHUB_EVENT: ${{ toJson(github.event) }}
         run: |
-          echo "github-event          -> ${{ GITHUB_EVENT }}"
+          echo "github-event          -> ${GITHUB_EVENT}"
           echo "github-event-head-ref -> ${{ github.event.head.ref }}"
