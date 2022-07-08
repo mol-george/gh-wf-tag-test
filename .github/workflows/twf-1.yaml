@@ -17,18 +17,21 @@ jobs:
     runs-on: ubuntu-latest
     if: "contains(github.event.head_commit.message, 'release')"
     steps:
-      ## Get the Head Commit Branch Name
-      - name: Get Head Commit Branch Name
-        uses: actions-ecosystem/action-regex-match@v2
-        id: get-head-commit-branch-name
-        with:
-          text: ${{ github.event.head_commit.message }}
-          regex: 'release\/\d\.\d\.\d'
-      # If steps.get-head-commit-branch-name.outputs.match is null exit the workflow
-      - name: Check if Head Commit Branch Name is Null
-        if: ${{ steps.get-head-commit-branch-name.outputs.match }} == null
-        run: |
-          echo "Head Commit Branch Name is Null - exiting"
-          exit 1
-      - name: Print Head Commit Branch Name
-        run: echo ${{ steps.get-head-commit-branch-name.outputs.match}}
+      # Print github.event.head.ref to console
+      - name: print-github-event-head-ref
+        run: echo ${{ github.event.head.ref}}
+#      ## Get the Head Commit Branch Name
+#      - name: Get Head Commit Branch Name
+#        uses: actions-ecosystem/action-regex-match@v2
+#        id: get-head-commit-branch-name
+#        with:
+#          text: ${{ github.event.head_commit.message }}
+#          regex: 'release\/\d\.\d\.\d'
+#      # If steps.get-head-commit-branch-name.outputs.match is null exit the workflow
+#      - name: Check if Head Commit Branch Name is Null
+#        if: ${{ steps.get-head-commit-branch-name.outputs.match }} == null
+#        run: |
+#          echo "Head Commit Branch Name is Null - exiting"
+#          exit 1
+#      - name: Print Head Commit Branch Name
+#        run: echo ${{ steps.get-head-commit-branch-name.outputs.match}}
