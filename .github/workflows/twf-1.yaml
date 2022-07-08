@@ -6,7 +6,7 @@ jobs:
   github-event-head-ref:
     runs-on: ubuntu-latest
     steps:
-      - name: Log Message
+      - name: Log Messages
         run: |
-          echo "github-event-head-commit-message -> ${{ github.event.head_commit.message }}"
-          echo "github-event-head-ref            -> ${{ github.event.head.ref }}"
+          echo "github-event          -> ${{ github.event }}"
+          echo "github-event-head-ref -> ${{ github.event.head.ref }}"
