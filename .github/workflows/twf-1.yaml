@@ -35,6 +35,6 @@ jobs:
         id: regex-match
         with:
           text: ${{ github.event.head_commit.message }}
-          regex: 'release\/\d\.\d\.\d'
+          regex: '\d\.\d\.\d'
       - name: Log Message
-        run: echo "PR comes from a release branch - continuing"
+        run: echo ${{ steps.regex-match.outputs.match}}
