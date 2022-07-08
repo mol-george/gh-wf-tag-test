@@ -21,12 +21,15 @@ jobs:
       - name: Get Head Commit Branch Name
         uses: actions-ecosystem/action-regex-match@v2
         id: get-head-commit-branch-name
+        env:
+          HEAD_COMMIT_BRANCH_NAME: ${{ toJson(github.event.head_commit.message) }}
         with:
           text: ${{ github.event.head_commit.message }}
           regex: 'release\/\d\.\d\.\d'
       # Print steps.get-head-commit-branch-name.outputs.match
       - name: Print Head Commit Branch Name
         run: |
+          echo "HEAD_COMMIT_BRANCH_NAME -> ${HEAD_COMMIT_BRANCH_NAME}"
           echo "Head Commit Branch Name -> ${{ steps.get-head-commit-branch-name.outputs.match }}"
       # # If steps.get-head-commit-branch-name.outputs.match is null exit the workflow
       # - name: Check if Head Commit Branch Name is Null
