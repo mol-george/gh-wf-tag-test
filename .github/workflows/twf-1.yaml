@@ -11,10 +11,16 @@ jobs:
         id: is-push-from-release-branch
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
-        with:
-          cmd: 'jq . <<<"${GITHUB_CONTEXT}"'
-          multiline: true
-          # cmd: echo "${GITHUB_CONTEXT}" | jq -r '.event.head_commit.message'
+        run: |
+          if [[ $GITHUB_REF =~ ^refs/heads/release/ ]]; then
+            echo "true"
+          else
+            echo "false"
+          fi
+        # with:
+        #   cmd: 'jq . <<<"${GITHUB_CONTEXT}"'
+        #   multiline: true
+        #   # cmd: echo "${GITHUB_CONTEXT}" | jq -r '.event.head_commit.message'
 
       - name: Show Commit Head Message
         run: 'echo "is-push-from-release-branch: ${{ steps.is-push-from-release-branch.outputs.value }}"'
