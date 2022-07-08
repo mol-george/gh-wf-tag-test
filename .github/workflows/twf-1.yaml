@@ -9,5 +9,5 @@ jobs:
       - name: Is Push Coming From release/xx.xx.xx branch
         id: is-push-from-release-branch
         env:
-          GITHUB_CONTEXT: ${{ toJson(github.event) }}
+          GITHUB_CONTEXT: ${{ github.event.head_commit.message }}
         run: echo $GITHUB_CONTEXT
