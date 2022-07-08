@@ -41,5 +41,10 @@ jobs:
 
       - name: TEST Print Release Branch
         run:
-          echo "${{ steps.get-repo-branch-match.outputs.match }}"
           echo "${{ steps.get-release-branch-major-minor-patch-number.outputs.match }}"
+
+      - name: TEST Print github context
+        env:
+          GITHUB_CONTEXT: toJson(github)
+        run:
+          echo "${GITHUB_CONTEXT}"
