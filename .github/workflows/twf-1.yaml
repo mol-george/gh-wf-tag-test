@@ -8,10 +8,9 @@ jobs:
     steps:
       - name: Is Push Coming From release/xx.xx.xx branch
         run: |
-          echo $GITHUB_REF
-          echo $GITHUB_HEAD_REF
-          # Chek if the push is from the release/xx.xx.xx branch
-          if [[ grep -q "release\/\d\.\d\.\d" ]]; then
+          env:
+            GITHUB_CONTEXT: ${{ toJson(github) }}
+          if [[ grep -q "release\/\d\.\d\.\d" <<<"${GITHUB_CONTEXT}" ]]; then
             echo "Push is from release/xx.xx.xx branch"
           else
             echo "Push is not from release/xx.xx.xx branch"
