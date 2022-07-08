@@ -9,4 +9,5 @@ jobs:
       - name: Is Push Coming From release/xx.xx.xx branch
         uses: sergeysova/jq-action@v2
         with:
-          cmd: jq '.' ${{ toJson(github) }}
+          # cmd: jq '.' ${{ toJson(github) }}
+          cmd: jq '.' ${{ github }}
