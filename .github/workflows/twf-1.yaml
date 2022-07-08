@@ -37,7 +37,7 @@ jobs:
         id: get-release-branch-major-minor-patch-number
         with:
           text: ${{ github.event.head_commit.message }}
-          regex: '\bmol-george\/release\/\d\.\d\.\d\b
+          regex: '\bmol-george\/release\/\d\.\d\.\d\b'
 
       - name: TEST Print Release Branch
         run:
