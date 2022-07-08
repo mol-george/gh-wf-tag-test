@@ -10,12 +10,5 @@ jobs:
         uses: sergeysova/jq-action@v2
         id: is-push-from-release-branch
         env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        with:
-          cmd: 'export COMM_HEAD_MESSAGE=$(jq .event <<<"${GITHUB_CONTEXT}"); echo ${COMM_HEAD_MESSAGE}'
-          multiline: true
-          # cmd: echo "${GITHUB_CONTEXT}" | jq -r '.event.head_commit.message'
-
-      # # Testing
-      # - name: Show Commit Head Message
-      #   run: 'echo "${{ steps.is-push-from-release-branch.outputs.value }}"'
+          GITHUB_CONTEXT: ${{ toJson(github.event) }}
+        run: $GITHUB_CONTEXT
