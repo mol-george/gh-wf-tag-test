@@ -12,10 +12,10 @@ jobs:
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
         with:
-          cmd: 'jq .event <<<"${GITHUB_CONTEXT}"'
+          cmd: 'export COMM_HEAD_MESSAGE=$(jq .event <<<"${GITHUB_CONTEXT}")'
           multiline: true
           # cmd: echo "${GITHUB_CONTEXT}" | jq -r '.event.head_commit.message'
 
-      # Testing
-      - name: Show Commit Head Message
-        run: 'echo "is-push-from-release-branch: ${{ steps.is-push-from-release-branch.outputs.value }}"'
+      # # Testing
+      # - name: Show Commit Head Message
+      #   run: 'echo "${{ steps.is-push-from-release-branch.outputs.value }}"'
