@@ -35,7 +35,9 @@ jobs:
       - name: Exit if Head Commit Branch Name does not match expected regex
         if: steps.get-head-commit-branch-name.outputs.match == ''
         run:
+          echo " ${{ steps.get-head-commit-branch-name.conclusion }}"
           echo "The Github Head Commit Message which is expected to contain the name of branch from which the PR was raised does not contain anything matching 'release/xx.xx.xx' -> ${{ github.event.head_commit.message }} - exiting"
           exit 1
+
       - name: SHOULD NOT GET EXECUTED IF PREVIOUS STEP EXITS
         run: echo "SHOULD NOT GET EXECUTED IF PREVIOUS STEP EXITS"
