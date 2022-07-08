@@ -21,6 +21,6 @@ jobs:
     steps:
       - name: Print Head Commit Branch
         run: |
-          grep -o "release\/\d\.\d\.\d" ${{ github.event.head_commit.message }}"
+          grep -o "release\/\d\.\d\.\d" "${{ github.event.head_commit.message }}"
       - name: Log Message
         run: echo "PR comes from a release branch - continuing"
