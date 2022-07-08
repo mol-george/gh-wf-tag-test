@@ -13,6 +13,7 @@ jobs:
           GITHUB_CONTEXT: ${{ toJson(github) }}
         run: |
           echo $GITHUB_REF
+          echo $GITHUB_HEAD_REF
           if [[ $GITHUB_REF =~ ^refs/heads/release/ ]]; then
             echo "true"
           else
