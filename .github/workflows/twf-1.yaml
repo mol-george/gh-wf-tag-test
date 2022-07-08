@@ -39,10 +39,7 @@ jobs:
           text: ${{ github.event.head_commit.message }}
           regex: '\b\d\.\d\.\d\b'
 
-      - name: TEST Print Release Branch
+      - name: TEST Print Release Branch and PR Commit
         run:
           echo "${{ steps.get-release-branch-major-minor-patch-number.outputs.match }}"
-
-      - name: TEST Print github context
-        run:
           echo "${{ github.event.head_commit.id }"
