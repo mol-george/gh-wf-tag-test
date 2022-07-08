@@ -18,9 +18,12 @@
 #       - name: Show Commit Head Message
 #         run: 'echo "is-push-from-release-branch: ${{ steps.is-push-from-release-branch.outputs.value }}"'
 
-
+name: twf1
+on:
+  push:
+    branches: [ "main" ]
 jobs:
-  build:
+  one:
     runs-on: ubuntu-latest
     steps:
 
