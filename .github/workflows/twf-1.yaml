@@ -56,5 +56,6 @@ jobs:
           # tag: "0.1.0"
           # commit_sha: github.event.head_commit.id
           tag: "${{ steps.get-release-branch-major-minor-patch-number.outputs.match }}"
-          commit_sha: c70bbb6
+          force_push_tag: true
+          # commit_sha: c70bbb6
           message: "tagged the main branch with the major.minor.patch version of the release branch pointing to the PR commit"
