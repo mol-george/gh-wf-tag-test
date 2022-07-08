@@ -8,8 +8,12 @@ jobs:
     steps:
       - name: Is Push Coming From release/xx.xx.xx branch
         uses: sergeysova/jq-action@v2
+        id: is-push-from-release-branch
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
         with:
           # cmd: "jq .event.head_commit.message <<<${GITHUB_CONTEXT}"
-          cmd: echo "${GITHUB_CONTEXT}" | jq '.event.head_commit.message'
+          cmd: echo "${GITHUB_CONTEXT}" | jq -r '.event.head_commit.message'
+
+      - name: Show Commit Head Message
+        run: 'echo "is-push-from-release-branch: ${{ steps.is-push-from-release-branch.outputs.value }}"'
