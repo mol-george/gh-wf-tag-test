@@ -2,6 +2,7 @@ name: twf1
 on:
   push:
     branches: [ "main" ]
+
 jobs:
   if-pr-not-from-release-branch:
     runs-on: ubuntu-latest
@@ -9,7 +10,12 @@ jobs:
     steps:
       - name: Log Message
         run: |
-          echo "Head Commit Message -> ${{ github.event.head_commit.message }}"
+          echo "PR merged from non release branch -> ${{ github.event.head_commit.message }} - exiting"
+
+      - name: Exit with Error if PR was not merged from the release Branch
+        if: steps.get-repo-branch-match.outputs.match == ''
+        run:
+          exit 1
 
   if-pr-from-release-branch:
     runs-on: ubuntu-latest
@@ -27,7 +33,7 @@ jobs:
         run:
           echo "The Github Head Commit Message which is expected to contain the name of repo and branch from which the PR was submitted did not returned a match for 'mol-george/release/xx.xx.xx'. Check the Github Head Commit Message -> ${{ github.event.head_commit.message }} - exiting"
 
-      - name: Exit if Head Commit Repo and Branch Names do not match expected regex
+      - name: Exit with Error if Head Commit Repo and Branch Names do not match Expected REGEX
         if: steps.get-repo-branch-match.outputs.match == ''
         run:
           exit 1
@@ -39,23 +45,12 @@ jobs:
           text: ${{ github.event.head_commit.message }}
           regex: '\b\d\.\d\.\d\b'
 
-      # Test
-      - name: TEST Print Release Branch and PR Commit
-        run:
-          echo "${{ steps.get-release-branch-major-minor-patch-number.outputs.match }}"
-          echo "${{ github.event.head_commit.id }}"
-
-      - name: Checkout
+      - name: Checking out Repo
         uses: actions/checkout@v3
 
-      # Test
-      - name: Tag
+      - name: Tag Main Branch with the PR's Commit
         uses: rickstaa/action-create-tag@v1
         with:
-          # tag: steps.get-release-branch-major-minor-patch-number.outputs.match
-          # tag: "0.1.0"
-          # commit_sha: github.event.head_commit.id
           tag: "${{ steps.get-release-branch-major-minor-patch-number.outputs.match }}"
           force_push_tag: true
-          # commit_sha: c70bbb6
-          message: "tagged the main branch with the major.minor.patch version of the release branch pointing to the PR commit"
+          message: "main branch tagged with the major.minor.patch version of the release branch pointing to the PR's commit"
