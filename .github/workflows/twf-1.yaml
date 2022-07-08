@@ -42,5 +42,5 @@ jobs:
       # Test
       - name: TEST Print Release Branch and PR Commit
         run:
-          # echo "${{ steps.get-release-branch-major-minor-patch-number.outputs.match }}"
-          echo "${{ github.event.head_commit.id }"
+          echo "${{ steps.get-release-branch-major-minor-patch-number.outputs.match }}"
+          echo "${{ github.event.head_commit.id }}"
