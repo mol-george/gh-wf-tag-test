@@ -20,17 +20,17 @@ jobs:
         id: get-repo-branch-match
         with:
           text: ${{ github.event.head_commit.message }}
-          regex: '\bmol-george\/elease\/\d\.\d\.\d\b'
+          regex: '\bmol-george\/release\/\d\.\d\.\d\b'
 
-      - name: Print REGEX result and the conclusion of the step
-        run:
-          echo "REGEX Head Commit Branch Name result -> ${{ steps.get-repo-branch-match.outputs.match }}"
-          echo " conclusion                          -> ${{ steps.get-repo-branch-match.conclusion }}"
+      # - name: Print REGEX result and the conclusion of the step
+      #   run:
+      #     echo "REGEX Head Commit Branch Name result -> ${{ steps.get-repo-branch-match.outputs.match }}"
+      #     echo " conclusion                          -> ${{ steps.get-repo-branch-match.conclusion }}"
 
       - name: Log message if Head Commit Repo and Branch Names do not match expected regex
         if: steps.get-repo-branch-match.outputs.match == ''
         run:
-          echo "The Github Head Commit Message which is expected to contain the name of repo and branch from which the PR was submitted did not returned a match for 'mol-george/release/xx.xx.xx' -> ${{ github.event.head_commit.message }} - exiting"
+          echo "The Github Head Commit Message which is expected to contain the name of repo and branch from which the PR was submitted did not returned a match for 'mol-george/release/xx.xx.xx'. Check the Github Head Commit Message -> ${{ github.event.head_commit.message }} - exiting"
 
       - name: Exit if Head Commit Repo and Branch Names do not match expected regex
         if: steps.get-repo-branch-match.outputs.match == ''
