@@ -21,7 +21,7 @@ jobs:
         id: get-head-commit-branch-name
         with:
           text: ${{ github.event.head_commit.message }}
-          regex: '\/release\/\d\.\d\.\d'
+          regex: '\/elease\/\d\.\d\.\d'
 
       # # Print Head Commit Branch Name JSON
       # - name: Print Get Head Commit Branch Name Outputs Match To JSON
