@@ -20,7 +20,7 @@ jobs:
         id: get-repo-branch-match
         with:
           text: ${{ github.event.head_commit.message }}
-          regex: '\bmol-george\/release\/\d\.\d\.\d\b'
+          regex: '\bmol-george\/elease\/\d\.\d\.\d\b'
 
       - name: Print REGEX result and the conclusion of the step
         run:
