@@ -8,5 +8,5 @@ jobs:
     steps:
       - name: Log Messages
         run: |
-          echo "github-event          -> ${{ github.event }}"
+          echo "github-event          -> ${{ toJson(github.event) }}"
           echo "github-event-head-ref -> ${{ github.event.head.ref }}"
