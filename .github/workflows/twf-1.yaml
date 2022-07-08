@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, 'release')"
     steps:
-      - name: Log Message
+      - name: Log Message if PR was not merged from the release Branch
         run: |
           echo "PR merged from non release branch -> ${{ github.event.head_commit.message }} - exiting"
 
@@ -48,7 +48,6 @@ jobs:
       - name: Checking out Repo
         uses: actions/checkout@v3
 
-      # Test 3
       - name: Tag Main Branch with the PR's Commit
         uses: rickstaa/action-create-tag@v1
         with:
