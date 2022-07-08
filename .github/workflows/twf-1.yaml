@@ -21,7 +21,7 @@ jobs:
         id: get-head-commit-branch-name
         with:
           text: ${{ github.event.head_commit.message }}
-          regex: 'elease\/\d\.\d\.\d'
+          regex: '\/release\/\d\.\d\.\d'
 
       # # Print Head Commit Branch Name JSON
       # - name: Print Get Head Commit Branch Name Outputs Match To JSON
@@ -29,7 +29,7 @@ jobs:
       #     HEAD_COMMIT_BRANCH_NAME: ${{ toJson(steps.get-head-commit-branch-name.outputs.match) }}
       #   run: echo "HEAD_COMMIT_BRANCH_NAME -> ${HEAD_COMMIT_BRANCH_NAME}"
 
-      - name: Print REGEX result of attempting to match Head Commit Branch Name as release/xx.xx.xx and the conclusion of the step
+      - name: Print REGEX result of attempting to match Head Commit Branch Name as /release/xx.xx.xx and the conclusion of the step
         run:
           echo "REGEX Head Commit Branch Name result -> ${{ steps.get-head-commit-branch-name.outputs.match }}"
           echo " ${{ steps.get-head-commit-branch-name.conclusion }}"
@@ -37,7 +37,7 @@ jobs:
       - name: Exit if Head Commit Branch Name does not match expected regex
         if: steps.get-head-commit-branch-name.outputs.match == ''
         run:
-          echo "The Github Head Commit Message which is expected to contain the name of branch from which the PR was raised does not contain anything matching 'release/xx.xx.xx' -> ${{ github.event.head_commit.message }} - exiting"
+          echo "The Github Head Commit Message which is expected to contain the name of branch from which the PR was raised does not contain anything matching '/release/xx.xx.xx' -> ${{ github.event.head_commit.message }} - exiting"
           exit 1
 
       - name: SHOULD NOT GET EXECUTED IF PREVIOUS STEP EXITS
