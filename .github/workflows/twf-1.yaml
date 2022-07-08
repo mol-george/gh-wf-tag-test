@@ -12,7 +12,7 @@ jobs:
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
         with:
-          cmd: 'export COMM_HEAD_MESSAGE=$(jq .event <<<"${GITHUB_CONTEXT}")'
+          cmd: 'export COMM_HEAD_MESSAGE=$(jq .event <<<"${GITHUB_CONTEXT}"); echo ${COMM_HEAD_MESSAGE}'
           multiline: true
           # cmd: echo "${GITHUB_CONTEXT}" | jq -r '.event.head_commit.message'
 
