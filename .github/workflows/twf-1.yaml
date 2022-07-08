@@ -7,12 +7,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Is Push Coming From release/xx.xx.xx branch
+        uses: sergeysova/jq-action@v2
+        id: is-push-from-release-branch
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: |
-          if [[ grep -q "release\/\d\.\d\.\d" <<<"${GITHUB_CONTEXT}" ]]; then
-            echo "Push is from release/xx.xx.xx branch"
-          else
-            echo "Push is not from release/xx.xx.xx branch"
-            exit 1
-          fi
+        with:
+          cmd: 'jq .event <<<"${GITHUB_CONTEXT}"'
+          multiline: true
+          # cmd: echo "${GITHUB_CONTEXT}" | jq -r '.event.head_commit.message'
+
+    # Testing
+    - name: Show Commit Head Message
+      run: 'echo "is-push-from-release-branch: ${{ steps.is-push-from-release-branch.outputs.value }}"'
