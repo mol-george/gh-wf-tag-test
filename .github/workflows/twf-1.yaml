@@ -14,13 +14,27 @@ jobs:
       # - name: Exit
       #   run: exit 1
 
+#  two:
+#    ### Job to Run if PR comes from a release branch
+#    runs-on: ubuntu-latest
+#    if: "contains(github.event.head_commit.message, 'release')"
+#    steps:
+#      - name: Print Head Commit Branch
+#        run: |
+#          grep -o "release\/\d\.\d\.\d" <<<"${{ github.event.head_commit.message }}"
+#      - name: Log Message
+#        run: echo "PR comes from a release branch - continuing"
+
   two:
-    ### Job to Run if PR comes from a release branch
+    # Job to Run if PR comes from a release branch
     runs-on: ubuntu-latest
     if: "contains(github.event.head_commit.message, 'release')"
     steps:
       - name: Print Head Commit Branch
-        run: |
-          grep -o "release\/\d\.\d\.\d" <<<"${{ github.event.head_commit.message }}"
+        uses: actions-ecosystem/action-regex-match@v2
+        id: regex-match
+        with:
+          text: ${{ github.event.head_commit.message }}
+          regex: 'release\/\d\.\d\.\d'
       - name: Log Message
         run: echo "PR comes from a release branch - continuing"
