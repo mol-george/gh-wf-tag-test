@@ -8,6 +8,7 @@ jobs:
     steps:
       - name: Is Push Coming From release/xx.xx.xx branch
         uses: sergeysova/jq-action@v2
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
         with:
-          # cmd: jq '.' ${{ toJson(github) }}
-          cmd: jq '.' ${{ github }}
+          cmd: jq '.event.head_commit.message' <<<"${GITHUB_CONTEXT}"
