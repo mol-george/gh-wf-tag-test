@@ -17,11 +17,12 @@ jobs:
     runs-on: ubuntu-latest
     if: "contains(github.event.head_commit.message, 'release')"
     steps:
-      - name: Print Head Commit Branch
+      # Get the Head Commit Branch Name
+      - name: Get Head Commit Branch Name
         uses: actions-ecosystem/action-regex-match@v2
-        id: regex-match
+        id: get-head-commit-branch-name
         with:
           text: ${{ github.event.head_commit.message }}
-          regex: '\d\.\d\.\d'
-      - name: Log Message
-        run: echo ${{ steps.regex-match.outputs.match}}
+          regex: 'release\/\d\.\d\.\d'
+      - name: Print Head Commit Branch Name
+        run: echo ${{ steps.get-head-commit-branch-name.outputs.match}}
