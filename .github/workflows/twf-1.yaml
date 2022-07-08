@@ -24,11 +24,15 @@ jobs:
         with:
           text: ${{ github.event.head_commit.message }}
           regex: 'release\/\d\.\d\.\d'
-      # If steps.get-head-commit-branch-name.outputs.match is null exit the workflow
-      - name: Check if Head Commit Branch Name is Null
-        if: ${{ steps.get-head-commit-branch-name.outputs.match }} == null
-        run: |
-          echo "Head Commit Branch Name is Null - exiting"
-          exit 1
+      # Print steps.get-head-commit-branch-name.outputs.match
       - name: Print Head Commit Branch Name
-        run: echo ${{ steps.get-head-commit-branch-name.outputs.match}}
+        run: |
+          echo "Head Commit Branch Name -> ${{ steps.get-head-commit-branch-name.outputs.match }}"
+      # # If steps.get-head-commit-branch-name.outputs.match is null exit the workflow
+      # - name: Check if Head Commit Branch Name is Null
+      #   if: ${{ steps.get-head-commit-branch-name.outputs.match }} == null
+      #   run: |
+      #     echo "Head Commit Branch Name is Null - exiting"
+      #     exit 1
+      # - name: Print Head Commit Branch Name
+      #   run: echo ${{ steps.get-head-commit-branch-name.outputs.match}}
