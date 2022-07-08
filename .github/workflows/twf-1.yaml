@@ -40,4 +40,6 @@ jobs:
           regex: '\b\d\.\d\.\d\b'
 
       - name: TEST Print Release Branch
-        run: echo " ${{ steps.get-release-branch-major-minor-patch-number.match }}"
+        run:
+          echo ${{ steps.get-repo-branch-match.outputs.match }}"
+          echo "${{ steps.get-release-branch-major-minor-patch-number.match }}"
