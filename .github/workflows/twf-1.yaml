@@ -5,7 +5,13 @@ on:
 jobs:
   one:
     runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, 'release')"
     steps:
-      - name: Is Push Coming From release/xx.xx.xx branch
-        id: is-push-from-release-branch
-        if: echo "PR does not come from a release branch" && !contains( github.event.head_commit.message, 'release' )
+      - name: Log Message and Exit
+        run: echo "PR does not come from a release branch - exiting"
+
+  two:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Echo Head Commit Message
+        run: echo ${{ github.event.head_commit.message }}
