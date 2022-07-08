@@ -13,11 +13,9 @@ jobs:
           echo "PR does not come from a release branch - exiting"
 
   if-pr-from-release-branch:
-    # Job to Run if PR comes from a release branch
     runs-on: ubuntu-latest
     if: "contains(github.event.head_commit.message, 'release')"
     steps:
-      ## Get the Head Commit Branch Name
       - name: Get Head Commit Branch Name
         uses: actions-ecosystem/action-regex-match@v2
         id: get-head-commit-branch-name
@@ -31,13 +29,11 @@ jobs:
       #     HEAD_COMMIT_BRANCH_NAME: ${{ toJson(steps.get-head-commit-branch-name.outputs.match) }}
       #   run: echo "HEAD_COMMIT_BRANCH_NAME -> ${HEAD_COMMIT_BRANCH_NAME}"
 
-      # Print steps.get-head-commit-branch-name.outputs.match
       - name: Print Head Commit Branch Name
         run: echo "Head Commit Branch Name -> ${{ steps.get-head-commit-branch-name.outputs.match }}"
 
-      # If steps.get-head-commit-branch-name.outputs.match is null exit the workflow
-      - name: Exit if Head Commit Branch Name is Null
-        if: steps.get-head-commit-branch-name.outputs.match == ''
+      - name: Exit if Head Commit Branch Name does not match expected regex
+        if: steps.get-head-commit-branch-name.outputs.match == ""
         run:
           echo "The Github Head Commit Message which is expected to contain the name of branch from which the PR was raised does not contain anything matching 'release/xx.xx.xx' -> ${{ github.event.head_commit.message }} - exiting"
           exit 1
