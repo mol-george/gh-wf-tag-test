@@ -10,3 +10,10 @@ jobs:
         run: |
           echo $GITHUB_REF
           echo $GITHUB_HEAD_REF
+          # Chek if the push is from the release/xx.xx.xx branch
+          if [[ grep -q "release\/\d\.\d\.\d" ]]; then
+            echo "Push is from release/xx.xx.xx branch"
+          else
+            echo "Push is not from release/xx.xx.xx branch"
+            exit 1
+          fi
