@@ -10,28 +10,27 @@ jobs:
       - name: Log Message
         run: |
           echo "Head Commit Message -> ${{ github.event.head_commit.message }}"
-          echo "PR does not come from a release branch - exiting"
 
   if-pr-from-release-branch:
     runs-on: ubuntu-latest
     if: "contains(github.event.head_commit.message, 'release')"
     steps:
-      - name: Get Head Commit Branch Name
+      - name: Get Repo Branch Match
         uses: actions-ecosystem/action-regex-match@v2
-        id: get-head-commit-branch-name
+        id: get-repo-branch-match
         with:
           text: ${{ github.event.head_commit.message }}
           regex: '\bmol-george\/release\/\d\.\d\.\d\b'
 
-      - name: Print REGEX result  and the conclusion of the step
+      - name: Print REGEX result and the conclusion of the step
         run:
-          echo "REGEX Head Commit Branch Name result -> ${{ steps.get-head-commit-branch-name.outputs.match }}"
-          echo " conclusion                          -> ${{ steps.get-head-commit-branch-name.conclusion }}"
+          echo "REGEX Head Commit Branch Name result -> ${{ steps.get-repo-branch-match.outputs.match }}"
+          echo " conclusion                          -> ${{ steps.get-repo-branch-match.conclusion }}"
 
-      - name: Exit if Head Commit Branch Name does not match expected regex
-        if: steps.get-head-commit-branch-name.outputs.match == ''
+      - name: Exit if Head Commit Repo and Branch Names do not match expected regex
+        if: steps.get-repo-branch-match.outputs.match == ''
         run:
-          echo "The Github Head Commit Message which is expected to contain the name of branch from which the PR was raised does not contain anything matching 'mol-george/release/xx.xx.xx' -> ${{ github.event.head_commit.message }} - exiting"
+          echo "The Github Head Commit Message which is expected to contain the name of repo and branch from which the PR was raised does not contain anything matching 'mol-george/release/xx.xx.xx' -> ${{ github.event.head_commit.message }} - exiting"
           exit 1
 
       - name: SHOULD NOT GET EXECUTED IF PREVIOUS STEP EXITS
