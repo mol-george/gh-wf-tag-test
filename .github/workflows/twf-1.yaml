@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     if: "contains(github.event.head_commit.message, 'release')"
     steps:
-      # Get the Head Commit Branch Name
+      ## Get the Head Commit Branch Name
       - name: Get Head Commit Branch Name
         uses: actions-ecosystem/action-regex-match@v2
         id: get-head-commit-branch-name
