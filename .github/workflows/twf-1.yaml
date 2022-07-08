@@ -15,6 +15,6 @@ jobs:
     steps:
       - name: Echo Head Commit Message
         env:
-          GITHUB_HEAD_COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
+          GITHUB_HEAD_COMMIT_MESSAGE: ${{ toJson(github) }}
         run: |
           echo ${GITHUB_HEAD_COMMIT_MESSAGE}
