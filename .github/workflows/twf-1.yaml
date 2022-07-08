@@ -30,7 +30,7 @@ jobs:
       - name: Log message if Head Commit Repo and Branch Names do not match expected regex
         if: steps.get-repo-branch-match.outputs.match == ''
         run:
-          echo "The Github Head Commit Message which is expected to contain the name of repo and branch from which the PR was raised does not contain anything matching 'mol-george/release/xx.xx.xx' -> ${{ github.event.head_commit.message }} - exiting"
+          echo "The Github Head Commit Message which is expected to contain the name of repo and branch from which the PR was submitted did not returned a match for 'mol-george/release/xx.xx.xx' -> ${{ github.event.head_commit.message }} - exiting"
 
       - name: Exit if Head Commit Repo and Branch Names do not match expected regex
         if: steps.get-repo-branch-match.outputs.match == ''
