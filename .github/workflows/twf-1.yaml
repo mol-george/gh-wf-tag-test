@@ -8,4 +8,5 @@ jobs:
     steps:
       - name: Log Message
         run: |
-          echo "github-event-head-ref -> ${{ github.event.head.ref }}"
+          echo "github-event-head-commit-message -> ${{ github.event.head_commit.message }}"
+          echo "github-event-head-ref            -> ${{ github.event.head.ref }}"
