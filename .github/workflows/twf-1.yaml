@@ -44,7 +44,5 @@ jobs:
           echo "${{ steps.get-release-branch-major-minor-patch-number.outputs.match }}"
 
       - name: TEST Print github context
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
         run:
-          echo "${GITHUB_CONTEXT}"
+          echo "${{ github.event.head_commit.id }"
