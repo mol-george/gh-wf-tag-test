@@ -25,7 +25,7 @@ jobs:
       - name: Get PR Branch Name
         run: |
           echo "PR Branch Name: ${{ github.event.pull_request.head.ref }}"
-      - name: Get Repo Branch Match
+#      - name: Get Repo Branch Match
 #        uses: actions-ecosystem/action-regex-match@9e6c4fb3d5e898f505be7a1fb6e7b0a278f6665b # v2.0.2
 #        id: get-repo-branch-match
 #        with:
