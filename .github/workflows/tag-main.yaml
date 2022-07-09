@@ -48,7 +48,7 @@ jobs:
       - name: Checking out Repo
         uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # v3.0.2
 
-      # TEST: pushing directly from main
+      # TEST: pushing from release branch
       - name: Tag Main Branch with the PR's Commit
         uses: rickstaa/action-create-tag@1ef0869561b8f45faba8b8e29984eb83b054e242 # v1.3.2
         with:
