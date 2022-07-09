@@ -21,10 +21,15 @@ jobs:
     runs-on: ubuntu-latest
     if: "contains(github.event.head_commit.message, 'release')"
     steps:
-      # get pr branch name
-      - name: Get PR Branch Name
-        run: |
-          echo "PR Branch Name: ${{ github.event.pull_request.head.ref }}"
+      - name: get pr number
+        run: echo ${{ github.event.number }}
+
+#       # get pr data
+#       - name:
+#         uses: actions-ecosystem/action-regex-match@1.0.0
+#         id: get-pr-data
+#         with:
+
 #      - name: Get Repo Branch Match
 #        uses: actions-ecosystem/action-regex-match@9e6c4fb3d5e898f505be7a1fb6e7b0a278f6665b # v2.0.2
 #        id: get-repo-branch-match
