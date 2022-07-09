@@ -24,7 +24,7 @@ jobs:
       - name: get pr number
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo ${{ GITHUB_CONTEXT }}
+        run: echo $GITHUB_CONTEXT
 
 #       # get pr data
 #       - name:
