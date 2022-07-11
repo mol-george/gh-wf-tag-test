@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: Get Release MMP
         id: get-release-mmp
-        uses: jungwinter/split@v2.0.
+        uses: JungWinter/split@v2.0.0
         with:
           msg: ${{ github.event.pull_request.head.ref }}
           separator: "/"
