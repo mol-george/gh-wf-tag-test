@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: Print Info
         env:
-          RR: ${{ toJson(github.event.pull_request) }}
+          RR: ${{ toJson(github.event) }}
         run: |
           echo ${{ github.ref_name }}
           echo ${RR}
