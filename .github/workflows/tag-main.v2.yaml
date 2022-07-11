@@ -6,16 +6,11 @@ on:
 
 jobs:
   tag-main:
-    if: startsWith(github.event.pull_request.head.ref, 'release/')
+    if: startsWith(github.event.pull_request.head.ref, 'release')
     runs-on: ubuntu-latest
     env:
-      PR_BRANCH: github.event.pull_request.head.ref
+      PR_BRANCH: ${{ github.event.pull_request.head.ref }}
     steps:
-    #  - name: Get Release MMP
-    #    id: get-release-mmp
-    #    uses: jungwinter/split@v2
-    #    with:
-    #      msg: ${{ github.event.pull_request.head.ref }}
       - name: Print Info
         run: |
           echo ${PR_BRANCH}
