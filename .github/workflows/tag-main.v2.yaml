@@ -1,0 +1,12 @@
+name: Tag main when PRs/Push Actions Come from release Branches
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  if-pr-from-release-branch:
+    runs-on: ubuntu-latest
+    if: "contains(github.event.head_commit.message, 'release')"
+    steps:
+      - name: Print github.ref_name
+        run: echo ${{ github.ref_name }}
