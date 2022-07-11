@@ -1,6 +1,6 @@
 name: Tag main when PRs/Push Actions Come from release Branches
 on:
-  push:
+  pull_request:
     branches: [ "main" ]
 
 jobs:
