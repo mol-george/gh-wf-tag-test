@@ -1,4 +1,4 @@
-name: Print Info About PRs
+name: Tag Main
 on:
   pull_request:
     branches: [ main ]
@@ -8,8 +8,6 @@ jobs:
   tag-main:
     if: startsWith(github.event.pull_request.head.ref, 'release/')
     runs-on: ubuntu-latest
-    env:
-      PR_BRANCH: ${{ github.event.pull_request.head.ref }}
     steps:
       - name: Get Release MMP
         id: get-release-mmp
@@ -18,12 +16,10 @@ jobs:
           msg: ${{ github.event.pull_request.head.ref }}
           separator: "/"
       - name: Print Info
-        run: |
-          echo "PR_BRANCH: ${PR_BRANCH}"
-          echo ${{ steps.get-release-mmp.outputs._1 }}
-      - name: Tag Main Branch with the PR's Commit
-        uses: rickstaa/action-create-tag@1ef0869561b8f45faba8b8e29984eb83b054e242 # v1.3.2
-        with:
-          tag: "${{ steps.get-release-mmp.outputs._1 }}"
-          force_push_tag: true
-          message: "main branch tagged with the major.minor.patch version of the release branch pointing to the PR's commit"
+        run: echo ${{ steps.get-release-mmp.outputs._1 }}
+      # - name: Tag Main Branch with the PR's Commit
+      #   uses: rickstaa/action-create-tag@1ef0869561b8f45faba8b8e29984eb83b054e242 # v1.3.2
+      #   with:
+      #     tag: "${{ steps.get-release-mmp.outputs._1 }}"
+      #     force_push_tag: true
+      #     message: "main branch tagged with the major.minor.patch version of the release branch pointing to the PR's commit"
