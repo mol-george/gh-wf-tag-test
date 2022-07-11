@@ -6,10 +6,13 @@ on:
 
 env:
   PR_BRANCH: ${{ github.event.pull_request.head.ref }}
+  PR_BRANCH_IS_RELEASE: ${{ startsWith(${PR_BRANCH}, 'He') }}
 
 jobs:
   if-pr-from-release-branch:
     runs-on: ubuntu-latest
     steps:
       - name: Print Info
-        run: echo ${PR_BRANCH}
+        run: |
+          echo ${PR_BRANCH}
+          echo ${PR_BRANCH_IS_RELEASE}
