@@ -6,7 +6,7 @@ on:
 
 jobs:
   tag-main:
-    if: startsWith(github.event.pull_request.head.ref, 'foo')
+    if: startsWith(github.event.pull_request.head.ref, 'release')
     runs-on: ubuntu-latest
     env:
       PR_BRANCH: ${{ github.event.pull_request.head.ref }}
