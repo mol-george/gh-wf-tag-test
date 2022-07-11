@@ -6,7 +6,7 @@ on:
 
 env:
   PR_BRANCH: ${{ github.event.pull_request.head.ref }}
-  PR_BRANCH_IS_RELEASE: ${{ startsWith(${PR_BRANCH}, 'He') }}
+  PR_BRANCH_IS_RELEASE: ${{ startsWith([env.PR_BRANCH], 'He') }}
 
 jobs:
   if-pr-from-release-branch:
