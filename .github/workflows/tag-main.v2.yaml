@@ -4,15 +4,13 @@ on:
     branches: [ main ]
     types: [closed]
 
-env:
-  PR_BRANCH: ${{ github.event.pull_request.head.ref }}
-  PR_BRANCH_IS_RELEASE: ${{ startsWith([env.PR_BRANCH], 'He') }}
-
 jobs:
-  if-pr-from-release-branch:
+  tag-main:
+    if: startsWith(github.event.pull_request.head.ref, 'foo')
     runs-on: ubuntu-latest
+    env:
+      PR_BRANCH: ${{ github.event.pull_request.head.ref }}
     steps:
       - name: Print Info
         run: |
           echo ${PR_BRANCH}
-          echo ${PR_BRANCH_IS_RELEASE}
