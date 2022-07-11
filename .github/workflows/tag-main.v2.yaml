@@ -1,13 +1,15 @@
 name: Print Info About PRs
 on:
   pull_request:
-    branches:
-      - main
+    branches: [ main ]
     types: [closed]
+
+env:
+  PR_BRANCH: ${{ github.event.pull_request.head.ref }}
 
 jobs:
   if-pr-from-release-branch:
     runs-on: ubuntu-latest
     steps:
       - name: Print Info
-        run: echo ${{ github.event.pull_request.head.ref }}
+        run: echo ${PR_BRANCH}
