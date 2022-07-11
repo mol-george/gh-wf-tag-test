@@ -1,4 +1,4 @@
-name: Tag main when PRs/Push Actions Come from release Branches
+name: Print Info About PRs
 on:
   pull_request:
     branches:
@@ -8,7 +8,6 @@ on:
 jobs:
   if-pr-from-release-branch:
     runs-on: ubuntu-latest
-    if: "contains(github.event.head_commit.message, 'release')"
     steps:
       - name: Print Info
         run: |
