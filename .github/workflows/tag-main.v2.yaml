@@ -20,4 +20,4 @@ jobs:
       - name: Print Info
         run: |
           echo "PR_BRANCH: ${PR_BRANCH}"
-          echo steps.get-release-mmp._1
+          echo ${{ steps.get-release-mmp._1 }}
