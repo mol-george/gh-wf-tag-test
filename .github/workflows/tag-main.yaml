@@ -25,3 +25,4 @@ jobs:
           tag: "${{ steps.get-release-mmp.outputs._1 }}"
           force_push_tag: true
           message: "main tagged with the ${{ steps.get-release-mmp.outputs._1 }} of the release branch pointing to the PR's commit"
+# testing tagging main when merging pr from a release branch
